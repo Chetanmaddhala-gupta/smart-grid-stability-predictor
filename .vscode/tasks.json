@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Train models (MLP + XGBoost)",
+      "type": "process",
+      "command": "${config:python.defaultInterpreterPath}",
+      "args": ["run_training.py"],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\.app_deps"
+        }
+      },
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Run Streamlit app",
+      "type": "process",
+      "command": "${config:python.defaultInterpreterPath}",
+      "args": [
+        "-m", "streamlit", "run", "streamlit_app.py",
+        "--server.address", "127.0.0.1",
+        "--server.port", "8502",
+        "--server.headless", "true",
+        "--global.developmentMode", "false"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\.app_deps"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {"regexp": "^(.*)$", "message": 1},
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "URL: http://127\\.0\\.0\\.1:8502"
+        }
+      }
+    },
+    {
+      "label": "Train models then run app",
+      "dependsOn": [
+        "Train models (MLP + XGBoost)",
+        "Run Streamlit app"
+      ],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

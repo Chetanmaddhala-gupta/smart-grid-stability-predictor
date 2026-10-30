@@ -1,0 +1,6 @@
+.app_deps/
+__pycache__/
+.ipynb_checkpoints/
+
+.ppt_build/
+_ppt_extract/

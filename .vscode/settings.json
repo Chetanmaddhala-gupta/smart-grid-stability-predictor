@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\CHETAN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "python.terminal.activateEnvironment": false,
+  "python.envFile": "${workspaceFolder}\\.vscode\\.env",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}\\.app_deps"
+  ],
+  "jupyter.notebookFileRoot": "${workspaceFolder}"
+}
